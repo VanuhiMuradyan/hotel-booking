@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <AuthContext.Provider value={{ user, loading, login, signup, logout, isAdmin }}>
-            {children}
+            {loading ? <div className="flex justify-center mt-20 text-gray-400">Loading...</div> : children}
         </AuthContext.Provider>
     )
 }
