@@ -18,7 +18,10 @@ const app = express()
 
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use(cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: [process.env.CLIENT_URL,
+              "https://hotel-booking-blond-omega.vercel.app",
+              "https://hotel-booking-git-main-vanuhimuradyans-projects.vercel.app"
+            ], 
     credentials: true
 }))
 app.use(express.json())
