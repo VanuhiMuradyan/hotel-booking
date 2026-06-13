@@ -73,7 +73,7 @@ class HotelController {
             }
 
             if (files && files.length > 0) {
-                const newImages = files.map(file => `/uploads/${file.filename}`)
+                const newImages = files.map(file => file.path || file.secure_url || file.url)
                 updateData.images = [...currentImages, ...newImages]
             } else {
                 updateData.images = currentImages
@@ -123,8 +123,7 @@ class HotelController {
                 return res.status(401).send({message: "Hotel not found or access denied"})
             }
 
-            const imageUrls = files.map(file => `/uploads/${file.filename}`)
-            
+            const imageUrls = files.map(file => file.path || file.secure_url || file.url)
 
             hotel.images.push(...imageUrls)
             await hotel.save()

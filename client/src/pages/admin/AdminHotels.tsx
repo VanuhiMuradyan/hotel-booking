@@ -37,7 +37,9 @@ export default function AdminHotels({ hotels, setHotels }: Props) {
                 hotel.images.slice(0, 3).map((img, i) => (
                   <img
                     key={i}
-                    src={`${import.meta.env.VITE_BASE_URL}${img}`}
+                    src={img?.startsWith("http") 
+                      ? img 
+                      : `${import.meta.env.VITE_BASE_URL}${img}`}                    
                     alt=""
                     className="w-24 h-20 object-cover rounded-xl"
                   />

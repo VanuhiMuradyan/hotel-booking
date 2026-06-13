@@ -127,7 +127,9 @@ export default function AdminHotelUpdate({ hotel, setHotel }: Props) {
                     {hotel.images.map((img, i) => (
                       <div key={i} className="relative">
                         <img
-                          src={`${import.meta.env.VITE_BASE_URL}${img}`}
+                          src={img.startsWith("http") 
+                            ? img 
+                            : `${import.meta.env.VITE_BASE_URL}${img}`}
                           className={`w-20 h-20 object-cover rounded-lg border-2 transition ${
                             removedImages.includes(img)
                               ? "opacity-30 border-red-400"

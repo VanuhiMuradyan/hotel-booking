@@ -41,11 +41,19 @@ export default function HotelDetails() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-8">
       <div className="mb-6">
-        <img src={`${import.meta.env.VITE_BASE_URL}${hotel.images[activeImg]}`}
+        <img 
+          src={hotel.images[activeImg]?.startsWith("http") 
+            ? hotel.images[activeImg] 
+            : `${import.meta.env.VITE_BASE_URL}${hotel.images[activeImg]}`}
           alt={hotel.name} className="w-full h-80 object-cover rounded-xl mb-3" />
         <div className="flex gap-2 overflow-x-auto">
           {hotel.images.map((img, i) => (
-            <img key={i} src={`${import.meta.env.VITE_BASE_URL}${img}`} alt=""
+            <img 
+              key={i} 
+              src={img.startsWith("http") 
+                ? img 
+                : `${import.meta.env.VITE_BASE_URL}${img}`}
+                alt=""
               onClick={() => setActiveImg(i)}
               className={`w-20 h-20 object-cover rounded-lg cursor-pointer flex-shrink-0 transition-all
                 ${activeImg === i ? "border-2 border-black opacity-100" : "border-2 border-transparent opacity-50"}`} />

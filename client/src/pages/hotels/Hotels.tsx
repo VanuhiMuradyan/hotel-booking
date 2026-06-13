@@ -37,22 +37,30 @@ export default function Hotels() {
                     className="border border-gray-300 rounded-lg px-3 py-2 w-48 focus:outline-none focus:ring-2 focus:ring-gray-400" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filtered.map(hotel => (
-                    <Link key={hotel._id} to={`/hotels/${hotel._id}`}>
-                        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition">
-                            {hotel.images?.[0] && (
-                                <img src={hotel.images[0]} alt={hotel.name}
-                                    className="w-full h-48 object-cover" />
-                            )}
-                            <div className="p-4">
-                                <h2 className="font-semibold text-gray-800 text-lg">{hotel.name}</h2>
-                                <p className="text-gray-500 text-sm">{hotel.city}, {hotel.country}</p>
-                                <p className="text-gray-900 font-bold mt-2">${hotel.price} / night</p>
-                                <p className="text-gray-400 text-sm">{hotel.availableRooms} rooms available</p>
+                {filtered.map(hotel => {
+                    const imageUrl = hotel.images?.[0]
+                        ? hotel.images[0].startsWith("http")
+                            ? hotel.images[0]
+                            : `${import.meta.env.VITE_BASE_URL}${hotel.images[0]}`
+                        : undefined
+
+                    return (
+                        <Link key={hotel._id} to={`/hotels/${hotel._id}`}>
+                            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition">
+                                {imageUrl && (
+                                    <img src={imageUrl} alt={hotel.name}
+                                        className="w-full h-48 object-cover" />
+                                )}
+                                <div className="p-4">
+                                    <h2 className="font-semibold text-gray-800 text-lg">{hotel.name}</h2>
+                                    <p className="text-gray-500 text-sm">{hotel.city}, {hotel.country}</p>
+                                    <p className="text-gray-900 font-bold mt-2">${hotel.price} / night</p>
+                                    <p className="text-gray-400 text-sm">{hotel.availableRooms} rooms available</p>
+                                </div>
                             </div>
-                        </div>
-                    </Link>
-                ))}
+                        </Link>
+                    )
+                })}
             </div>
         </div>
     )

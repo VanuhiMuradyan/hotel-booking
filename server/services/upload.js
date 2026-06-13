@@ -1,12 +1,20 @@
+import { v2 as cloudinary } from 'cloudinary'
+import { CloudinaryStorage } from 'multer-storage-cloudinary'
 import multer from 'multer'
-import uniqid from 'uniqid';
+import { env } from '../config/env.js'
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + uniqid() + file.originalname);
+cloudinary.config({
+    cloud_name: env.cloudinaryCloudName,
+    api_key: env.cloudinaryApiKey,
+    api_secret: env.cloudinaryApiSecret
+})
+
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: 'hotel-booking',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'avif']
     }
-});
-export const upload = multer({ storage });
+})
+
+export const upload = multer({ storage })

@@ -62,8 +62,10 @@ export default function Home() {
               <Link key={hotel._id} to={`/hotels/${hotel._id}`} className="no-underline">
                 <div className="bg-white rounded-lg overflow-hidden border border-gray-100 cursor-pointer transition-shadow hover:shadow-lg">
                   <img
-                    src={`${import.meta.env.VITE_BASE_URL}${hotel.images[0]}`}
-                    alt={hotel.name}
+                    src={hotel.images[0]?.startsWith("http") 
+                          ? hotel.images[0] 
+                          : `${import.meta.env.VITE_BASE_URL}${hotel.images[0]}`} 
+                     alt={hotel.name}
                     className="w-full h-44 object-cover"
                   />
                   <div className="p-4">
