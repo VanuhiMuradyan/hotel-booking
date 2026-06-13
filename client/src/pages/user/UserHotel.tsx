@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import api from "../../services/api"
 import { useAuth } from "../../context/AuthContext"
 
@@ -38,7 +38,11 @@ return (
     {!isAdmin && (
       <>
         <h2 className="text-xl font-bold mb-4">Book this hotel</h2>
-        {success ? (
+        {!user ? (
+          <p className="text-gray-500">
+            Please <Link to="/login" className="text-gray-900 font-semibold underline">login</Link> to book this hotel.
+          </p>
+        ) : success ? (
           <p className="text-green-600 font-medium">Booking successful!</p>
         ) : (
           <form onSubmit={handleBook} className="space-y-4">
