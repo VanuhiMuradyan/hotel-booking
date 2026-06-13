@@ -6,7 +6,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white border-b border-gray-200 px-8 py-4" style={{ fontFamily: "'Georgia', serif" }}>
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <div className="flex justify-between items-center">
 
         <Link to="/" className="text-xl font-bold tracking-widest uppercase text-gray-900">
           hotel<span className="text-gray-400">book</span>
